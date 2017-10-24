@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>PayApi OC</id>
+	<version>0.1</version>
+	<vqmver>2.4.0</vqmver>
+	<author>PayApi.io</author>
+	<file name="system/framework.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[// Model Autoload]]></search>
+			<add><![CDATA[
+				// PA SDK
+				$library = DIR_SYSTEM . 'library' . DIRECTORY_SEPARATOR;
+				require($library . 'payapiHelper' . '.' . 'php');
+				require($library . 'payapiSdk' . '.' . 'php');
+				$registry->set('payapiSdk', new payapiSdk($registry, 'opencart23'));
+
+				// Model Autoload]]>
+			</add>
+		</operation>
+	</file>
+</modification>
