@@ -3,24 +3,43 @@
 class ControllerExtensionPaymentPayapi extends Controller
 {
 
-	private $error = array();
-	private $brand = 'payapi';
+	private $error    = array();
+	private $brand    = 'payapi';
 	private $settings = false;
-	private $data = array();
-	private $valid = false;
+	private $data     = array();
+	private $valid    = false;
+	private $staging  = false;
 
 	public function index()
 	{
 		$this->language->load('extension/payment/payapi');
 		$this->load->model('extension/payment/payapi');
 		$this->settings = $this->model_extension_payment_payapi->settings();
-
+		if (isset($this->settings['staging']) !== true || $this->settings['staging'] !== true) {
+			$this->staging = false;
+		} else {
+			$this->staging = true;
+		}
 		$this->load->model('localisation/order_status');
 		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
-
+		$this->branding();
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			$this->load->model('setting/setting');
+			//-> TODEVELOP: do not record settings
+			//->$this->model_setting_setting->editSetting('payapi', $this->request->post);
+			$this->data['success'] = $this->language->get('text_success');
+		} else {
+			$this->data['success'] = false;
+		}
+		//var_dump($this->data['branding']); exit;
 		$this->wording();
+		//->var_dump($this->data); exit;
 		$this->breadcrumbs();
-		//var_dump(get_declared_classes()); exit;
+		//-> webpage blocks
+		$this->data['header'] = $this->load->controller('common/header');
+		$this->data['column_left'] = $this->load->controller('common/column_left');
+		$this->data['footer'] = $this->load->controller('common/footer');
+		//->var_dump(get_declared_classes()); exit;
 		$this->response->setOutput($this->load->view('extension/payment/payapi', $this->data));
 	}
 
@@ -110,6 +129,11 @@ class ControllerExtensionPaymentPayapi extends Controller
 			"text_edit",
 			"tab_general",
 			"tab_status",
+			"text_phone",
+			"text_email",
+			"text_dashboard",
+			"text_yes",
+			"text_no",
 			"status_processing",
 			"status_success",
 			"status_canceled",
@@ -122,8 +146,21 @@ class ControllerExtensionPaymentPayapi extends Controller
 			"label_instant_payments",
 			"label_debug",
 			"label_order",
+			"label_processing_status",
+			"label_processed_status",
+			"",
+			"",
+			"select_default",
+			"select_shipping",
+			"select_mode",
+			"input_selected",
+			"input_disabled",
+			"mode_1",
+			"mode_2",
+			"mode_3",
 			"help_public_id",
 			"help_api_key",
+			"help_instantpayments",
 			"help_verified",
 			"help_unverified"
 		);
@@ -134,7 +171,13 @@ class ControllerExtensionPaymentPayapi extends Controller
 
 	private function branding()
 	{
-		return $this->payapaiSdk->branding($this->brand);
+		$branding = $this->payapiSdk->branding($this->brand);
+		if (isset($branding['code']) === true && isset($branding['data']) === true && $branding['code'] ===200) {
+			$this->data['branding'] = $branding['data'];
+			$this->data['branding']['dashboard'] = 'http://input.payapi.io/';
+			return true;
+		}
+		return false;
 	}
 
 	private function dependencies()
