@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html dir="ltr" lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  	<meta name="description" content="PayApi Payments for OpenCart v2.3.x v0.0.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  	<title>PayApi Payments for OpenCart v2.3.x v0.0.1</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" integrity="sha384-OHBBOqpYHNsIqQy8hL1U+8OXf9hH6QRxi0+EODezv82DfnZoV7qoHAZDwMwEJvSw" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <style>
+      body {
+        padding-top: 50px;
+        font-size: 16px;
+        font-style: normal;
+        font-variant: normal;
+        font-family: "Open Sans";
+        font-weight: 500;
+        line-height: 18px;
+      }
+      .spaced {
+        line-height: 22px;
+        margin-bottom: 0;
+      }
+      .mainav {
+        height: 1em;
+        padding-top: 7px;
+      }
+      h2 {
+        background-color: #4298d5;
+        padding: .1em .4em;
+        color: #ffffff;
+        margin-bottom: 0;
+        letter-spacing: 4px;
+      }
+      .row {
+        padding: 0 20px;
+      }
+      code {
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+      .footer {
+        background-color: #000000;
+        width: auto;
+        color: #999999;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-top: 50px;
+        font-size: .8em;
+        letter-spacing: 1px;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      .footer a, .footer a:hover {
+        color: #ffffff;
+      }
+      .footer .container i {
+        color: #ffffff;
+        font-size: 2em;
+        margin-top: -.1em;
+      }
+      p {
+        text-align: justify;
+      }
+      .carousel-indicators {
+        bottom: 0;
+      }
+      .carousel-inner {
+        border: #ebebeb 1px solid;
+        box-shadow: 2px 2px 14px #ebebeb;
+      }
+      .carousel-inner .item img {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+    <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+   <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div id="navbar" class="mainav">
+          <a href="https://payapi.io" target="_blank" class="pull-left" title="PayApi.io"><img src="https://payapi.io/wp-content/uploads/2015/02/logo_transparent.png" alt="PayApi Payments for OpenCart v2.3.x" style="height: 36px; width: auto;" /></a>
+          <a href="https://input.payapi.io/" target="_blank" class="btn btn-success pull-right">sign up</a>
+          <a href="https://payapi.io/apidoc/" target="_blank" class="btn btn-primary pull-right" style="margin-right: 1em;">documentation</a>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <h1>PayApi Payments for OpenCart v2.3.x</h1><code class="pull-right">plugin version 0.0.1</code><br />
+<code>date: Thu, 19 Oct 2017 09:26:56 +0000</code><br />
+<code>copyright: PayApi.io</code><br />
+<code>author: joseba.mirena</code><br />
+<br />
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li><li data-target="#myCarousel" data-slide-to="1"></li><li data-target="#myCarousel" data-slide-to="2"></li><li data-target="#myCarousel" data-slide-to="3"></li><li data-target="#myCarousel" data-slide-to="4"></li><li data-target="#myCarousel" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active"><img src="images/payapi_payments_01.jpg" alt="payapi_payments_01.jpg" class="animated slideInRight"></div><div class="item"><img src="images/payapi_payments_02.jpg" alt="payapi_payments_02.jpg" class="animated slideInRight"></div><div class="item"><img src="images/payapi_payments_03.jpg" alt="payapi_payments_03.jpg" class="animated slideInRight"></div><div class="item"><img src="images/payapi_payments_04.jpg" alt="payapi_payments_04.jpg" class="animated slideInRight"></div><div class="item"><img src="images/payapi_payments_05.jpg" alt="payapi_payments_05.jpg" class="animated slideInRight"></div><div class="item"><img src="images/payapi_payments_06.jpg" alt="payapi_payments_06.jpg" class="animated slideInRight"></div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div><!--<br />
+<img src="images/payapiPayments-710x380.jpg" width="710" height="380" alt="PayApi Payments for OpenCart v2.3.x" style="width: 100%; height: auto;" /--><br />
+<p>This extension uses <b>VQmod</b>, so it does not overwrite any file.</p><br />
+<p>The official PayApi extension for OpenCart. PayApi is a modern online payments platform provider providing merchants a secure and scalable payments routing platform for online and mobile consumers. The smart payments routing is done between several payment gateways depending on multiple factors and with pre-processing through advanced anti-fraud system. The PayApi also integrates with patent-pending gesture based social sharing functionality that enables a unique social shopping experience for the consumers. The PayApi is a limited liability company in Finland, Europe.</p><br />
+<p>The extension includes a new payment gateway for the checkout process - PayApi secure online payments. Also adds the new UI components to your shop in order to enable the easy <b>Instant Buy</b> functionality and gesture-based social sharing of your products and shop contents to different social networks (patent pending).</p><br />
+<p>Typical users of this extension are merchants that want to enable social shopping in their online store and to protect their online sales with advanced anti-fraud operations. Another use case has been the smart routing of payments between different payment gateways and controlling it all in a single backoffice: reporting, weight between payment gateways, fraud threshold, etc.</p><br />
+Happy selling!<br />
+<b>PayApi IT Team</b><br />
+<h2><i class="fa fa-check-square pull-right"></i>FEATURES</h2><br />
+<div class="spaced"><i class="fa fa-check-square-o text-success"></i> <b>FREE</b> service account<br /><i class="fa fa-check-square-o text-success"></i> <b>PCI DSS level 1</b> certified secure payments platform<br /><i class="fa fa-check-square-o text-success"></i> Payments routing between different payment gateways<br /><i class="fa fa-check-square-o text-success"></i> Advanced <b>anti-fraud operations</b> for every payment: minimize your chargeback costs<br /><i class="fa fa-check-square-o text-success"></i> <b>Smart routing</b> of different type of payments, such as credit card (MasterCard, Visa, etc.) and crypto-currency (Bitcoin)<br /><i class="fa fa-check-square-o text-success"></i> <b>Real-time reporting</b> of payments with the PayApi backoffice<br /><i class="fa fa-check-square-o text-success"></i> Add easy-to-use <b>Instant Buy</b> functionality to your shop<br /><i class="fa fa-check-square-o text-success"></i> Integrated seamless <b>Social Sharing</b> functionality: let your shop users to share anything from your shop<br /><i class="fa fa-check-square-o text-success"></i> <b>Partial Payments</b>, boost your sales!</div><br />
+<br />
+<h2><i class="fa fa-cog pull-right"></i>INSTALL</h2><br />
+- Upload <code>upload</code> folder files to your store root directory<br />
+- Login into your store backend and go to extensions<br />
+- Select payments and click in <code>PayApi extension</code> install button<br />
+By default extension is installed in demo mode<br />
+<br />
+<h2><i class="fa fa-tasks pull-right"></i>SETTINGS</h2><br />
+- Login into your store backend and go to extensions<br />
+- Select payments and click in <code>PayApi extension</code> settings button<br />
+You would need a PayApi free account to disable demo mode, available in:<br />
+<a href="https://input.payapi.io/" target="_blank">https://input.payapi.io/</a><br />
+<br />
+<h2><i class="fa fa-gavel pull-right"></i>LEGAL DISCLAIMER</h2><br />
+PayApi seeks to ensure the highest level of quality and security in all its services, but given the multitude of factors and their technical complexity, the services are provided 'as is', without any responsibility of whatsoever for any kind of loss or damage, of any character, from the use of the service provided herein.<br />
+<br />
+<h2><i class="fa fa-life-ring pull-right"></i> SUPPORT</h2><br />
+<div class="spaced"><a href="https://payapi.io"><i class="fa fa-hand-pointer-o"></i> PayApi.io</a><br />
+<a href="mailto:florin+pluginOc23payapi.io"><i class="fa fa-envelope-open-o"></i> florin+pluginOc23payapi.io</a><br />
+<a href="tel:34667074000"><i class="fa fa-phone"></i> +34667074000</a></div><br />
+<h2><i class="fa fa-file-code-o pull-right"></i>FILES</h2><br />
+<pre><a href="upload/admin/model/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> admin/model/extension/payment/payapi.php</a><br /><a href="upload/admin/controller/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> admin/controller/extension/payment/payapi.php</a><br /><a href="upload/admin/view/template/extension/payment/payapi.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> admin/view/template/extension/payment/payapi.tpl</a><br /><a href="upload/admin/view/image/payment/payapi.png" target="_blank"><i class="fa fa-file-image-o"></i> admin/view/image/payment/payapi.png</a><br /><a href="upload/admin/view/stylesheet/payapi.css" target="_blank"><i class="fa fa-file-code-o"></i> admin/view/stylesheet/payapi.css</a><br /><a href="upload/admin/view/stylesheet/payapi.min.css" target="_blank"><i class="fa fa-file-code-o"></i> admin/view/stylesheet/payapi.min.css</a><br /><a href="upload/admin/language/en-gb/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> admin/language/en-gb/extension/payment/payapi.php</a><br /><a href="upload/admin/language/es-es/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> admin/language/es-es/extension/payment/payapi.php</a><br /><a href="upload/admin/language/fi-fi/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> admin/language/fi-fi/extension/payment/payapi.php</a><br /><a href="upload/catalog/model/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/extension/payment/payapi.php</a><br /><a href="upload/catalog/model/payapi/callback.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/callback.php</a><br /><a href="upload/catalog/model/payapi/demo.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/demo.php</a><br /><a href="upload/catalog/model/payapi/handler.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/handler.php</a><br /><a href="upload/catalog/model/payapi/instantbuy.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/instantbuy.php</a><br /><a href="upload/catalog/model/payapi/instantcart.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/instantcart.php</a><br /><a href="upload/catalog/model/payapi/localize.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/localize.php</a><br /><a href="upload/catalog/model/payapi/product.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/product.php</a><br /><a href="upload/catalog/model/payapi/return.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/return.php</a><br /><a href="upload/catalog/model/payapi/transaction.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/model/payapi/transaction.php</a><br /><a href="upload/catalog/controller/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/controller/extension/payment/payapi.php</a><br /><a href="upload/catalog/controller/payapi/callback.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/controller/payapi/callback.php</a><br /><a href="upload/catalog/controller/payapi/demo.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/controller/payapi/demo.php</a><br /><a href="upload/catalog/controller/payapi/return.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/controller/payapi/return.php</a><br /><a href="upload/catalog/controller/payapi/test.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/controller/payapi/test.php</a><br /><a href="upload/catalog/view/payapi/demo.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/payapi/demo.css</a><br /><a href="upload/catalog/view/payapi/demo.min.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/payapi/demo.min.css</a><br /><a href="upload/catalog/view/payapi/notifications.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/payapi/notifications.css</a><br /><a href="upload/catalog/view/payapi/notifications.min.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/payapi/notifications.min.css</a><br /><a href="upload/catalog/view/payapi/style.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/payapi/style.css</a><br /><a href="upload/catalog/view/payapi/style.min.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/payapi/style.min.css</a><br /><a href="upload/catalog/view/sdk/config" target="_blank"><i class="fa fa-code "></i> catalog/view/sdk/config</a><br /><a href="upload/catalog/view/sdk/images/arrow.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/arrow.png</a><br /><a href="upload/catalog/view/sdk/images/fullpage.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/fullpage.png</a><br /><a href="upload/catalog/view/sdk/images/ic_facebook.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_facebook.png</a><br /><a href="upload/catalog/view/sdk/images/ic_fngrapp_rounded.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_fngrapp_rounded.png</a><br /><a href="upload/catalog/view/sdk/images/ic_gmail.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_gmail.png</a><br /><a href="upload/catalog/view/sdk/images/ic_gplus.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_gplus.png</a><br /><a href="upload/catalog/view/sdk/images/ic_linkedin.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_linkedin.png</a><br /><a href="upload/catalog/view/sdk/images/ic_mailto.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_mailto.png</a><br /><a href="upload/catalog/view/sdk/images/ic_messenger.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_messenger.png</a><br /><a href="upload/catalog/view/sdk/images/ic_pinterest.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_pinterest.png</a><br /><a href="upload/catalog/view/sdk/images/ic_reddit.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_reddit.png</a><br /><a href="upload/catalog/view/sdk/images/ic_returningconsumer.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_returningconsumer.png</a><br /><a href="upload/catalog/view/sdk/images/ic_twitter.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_twitter.png</a><br /><a href="upload/catalog/view/sdk/images/ic_whatsapp.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/ic_whatsapp.png</a><br /><a href="upload/catalog/view/sdk/images/icon_partialpayments.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/icon_partialpayments.png</a><br /><a href="upload/catalog/view/sdk/images/icon_webshop.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/icon_webshop.png</a><br /><a href="upload/catalog/view/sdk/images/icon_webshop_addtocart.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/icon_webshop_addtocart.png</a><br /><a href="upload/catalog/view/sdk/images/intro.png" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/intro.png</a><br /><a href="upload/catalog/view/sdk/images/loading.gif" target="_blank"><i class="fa fa-file-image-o"></i> catalog/view/sdk/images/loading.gif</a><br /><a href="upload/catalog/view/sdk/jquery/jquery.js" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/sdk/jquery/jquery.js</a><br /><a href="upload/catalog/view/sdk/locale/en.locale" target="_blank"><i class="fa fa-code "></i> catalog/view/sdk/locale/en.locale</a><br /><a href="upload/catalog/view/sdk/locale/es.locale" target="_blank"><i class="fa fa-code "></i> catalog/view/sdk/locale/es.locale</a><br /><a href="upload/catalog/view/sdk/locale/fi.locale" target="_blank"><i class="fa fa-code "></i> catalog/view/sdk/locale/fi.locale</a><br /><a href="upload/catalog/view/sdk/sdk-controller.min.js" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/sdk/sdk-controller.min.js</a><br /><a href="upload/catalog/view/sdk/sdk-ui.min.js" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/sdk/sdk-ui.min.js</a><br /><a href="upload/catalog/view/sdk/sdk-v4.38.txt" target="_blank"><i class="fa fa-file-text-o"></i> catalog/view/sdk/sdk-v4.38.txt</a><br /><a href="upload/catalog/view/sdk/sdk.min.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/sdk/sdk.min.css</a><br /><a href="upload/catalog/view/sdk/tools/instantcart.js" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/sdk/tools/instantcart.js</a><br /><a href="upload/catalog/view/sdk/tools/sdk-settings.js" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/sdk/tools/sdk-settings.js</a><br /><a href="upload/catalog/view/sdk/touch.min.js" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/sdk/touch.min.js</a><br /><a href="upload/catalog/view/theme/default/stylesheet/demo.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/theme/default/stylesheet/demo.css</a><br /><a href="upload/catalog/view/theme/default/stylesheet/demo.min.css" target="_blank"><i class="fa fa-file-code-o"></i> catalog/view/theme/default/stylesheet/demo.min.css</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/cancelled.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/cancelled.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/common/footer.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/common/footer.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/common/header.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/common/header.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/common/top.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/common/top.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/confirm.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/confirm.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/failed.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/failed.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/loading.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/loading.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/payment.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/payment.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/demo/successful.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/demo/successful.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/instantcart.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/instantcart.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/onclickpayment.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/onclickpayment.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/return.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/return.tpl</a><br /><a href="upload/catalog/view/theme/default/template/payapi/sdkconfiguration.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/payapi/sdkconfiguration.tpl</a><br /><a href="upload/catalog/view/theme/default/template/extension/payment/payapi.tpl" target="_blank"><i class="fa fa-pencil-square-o"></i> catalog/view/theme/default/template/extension/payment/payapi.tpl</a><br /><a href="upload/catalog/language/en-gb/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/en-gb/extension/payment/payapi.php</a><br /><a href="upload/catalog/language/en-gb/payapi/callback.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/en-gb/payapi/callback.php</a><br /><a href="upload/catalog/language/en-gb/payapi/demo.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/en-gb/payapi/demo.php</a><br /><a href="upload/catalog/language/en-gb/payapi/mail.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/en-gb/payapi/mail.php</a><br /><a href="upload/catalog/language/en-gb/payapi/products.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/en-gb/payapi/products.php</a><br /><a href="upload/catalog/language/en-gb/payapi/return.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/en-gb/payapi/return.php</a><br /><a href="upload/catalog/language/es-es/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/es-es/extension/payment/payapi.php</a><br /><a href="upload/catalog/language/es-es/payapi/demo.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/es-es/payapi/demo.php</a><br /><a href="upload/catalog/language/es-es/payapi/products.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/es-es/payapi/products.php</a><br /><a href="upload/catalog/language/es-es/payapi/return.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/es-es/payapi/return.php</a><br /><a href="upload/catalog/language/fi-fi/extension/payment/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/fi-fi/extension/payment/payapi.php</a><br /><a href="upload/catalog/language/fi-fi/payapi/demo.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/fi-fi/payapi/demo.php</a><br /><a href="upload/catalog/language/fi-fi/payapi/products.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/fi-fi/payapi/products.php</a><br /><a href="upload/catalog/language/fi-fi/payapi/return.php" target="_blank"><i class="fa fa-file-code-o "></i> catalog/language/fi-fi/payapi/return.php</a><br /><a href="upload/system/library/payapi.php" target="_blank"><i class="fa fa-file-code-o "></i> system/library/payapi.php</a><br /><a href="upload/system/library/sdk.php" target="_blank"><i class="fa fa-file-code-o "></i> system/library/sdk.php</a><br /><a href="upload/system/library/payapi/index.php" target="_blank"><i class="fa fa-file-code-o "></i> system/library/payapi/index.php</a><br /><a href="upload/vqmod/xml/vqmod_payapi.xml" target="_blank"><i class="fa fa-cogs"></i> vqmod/xml/vqmod_payapi.xml</a></pre>
+      </div>
+    </div>
+    <footer>
+      <div id="footer" class="footer">
+        <div class="container">
+          <a href="javascript:void(0);" onclick="alert('Generated with PHP Plugin Release Builder')" class="pull-right"><i class="fa fa-info-circle" title="Generated with PHP Plugin Release Builder"></i></a>
+          &copy;2017 <a href="https://payapi.io" title="PayApi Payments for OpenCart v2.3.x" target="_blank">PayApi</a>, PayApi Payments for OpenCart v2.3.x
+        </div>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="http://mynameismatthieu.com/WOW/dist/wow.min.js"></script>
+  </body>
+</html>
