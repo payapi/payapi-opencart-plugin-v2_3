@@ -9,21 +9,51 @@ class ControllerExtensionPaymentPayapi extends Controller
 	private $data     = array();
 	private $valid    = false;
 	private $staging  = false;
+	private $values   = array(
+		"payapi_public_id",
+		"payapi_api_key",
+		"payapi_shipping",
+		"payapi_shipping",
+		"payapi_instantpayments",
+		"payapi_mode",
+		"payapi_debug",
+		"payapi_order",
+		"payapi_processing_status_id",
+		"payapi_processed_status_id",
+		"payapi_canceled_status_id",
+		"payapi_failed_status_id",
+		"payapi_chargeback_status_id"
+	);
+	private $statuses  = array(
+		"processing" =>  2,
+		"processed"  =>  1,
+		"failed"     => 10,
+		"chargeback" => 13
+	);
 
 	public function index()
 	{
 		$this->language->load('extension/payment/payapi');
 		$this->load->model('extension/payment/payapi');
 		$this->settings = $this->model_extension_payment_payapi->settings();
+		/*
+		@TODO NOTE: settings should be called just when demo mode is not active (staging/production)
+		 */
 		if (isset($this->settings['staging']) !== true || $this->settings['staging'] !== true) {
-			$this->staging = false;
+			if (isset($this->request->post['payapi_mode']) === true && $this->request->post['payapi_mode'] != 0) {
+				$staging = true; 
+			} else {
+				$this->staging = false;
+			}
+			
 		} else {
 			$this->staging = true;
 		}
-		$this->load->model('localisation/order_status');
-		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 		$this->branding();
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+		$this->load->model('localisation/order_status');
+		$this->load->model('extension/extension');
+		$this->data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
+		if (($this->request->server['REQUEST_METHOD'] === 'POST') && $this->validate()) {
 			$this->load->model('setting/setting');
 			//-> TODEVELOP: do not record settings
 			//->$this->model_setting_setting->editSetting('payapi', $this->request->post);
@@ -31,10 +61,26 @@ class ControllerExtensionPaymentPayapi extends Controller
 		} else {
 			$this->data['success'] = false;
 		}
-		//var_dump($this->data['branding']); exit;
+		$this->errors();
 		$this->wording();
-		//->var_dump($this->data); exit;
+		$this->values();
+		$this->status();
 		$this->breadcrumbs();
+		//-> @NOTE if not available this gets NULL
+		$this->data['shippings'] = $this->model_extension_extension->getInstalled('shipping');
+		//-> action(s)
+		$this->data['action'] = $this->url->link('extension/payment/payapi', 'token=' . $this->session->data['token'], true);
+		$this->data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
+		//-> 
+		if($this->valid === true) {
+			$this->data['account_status'] = $this->language->get('text_verified');
+			$this->data['account_status_class'] = 'success';
+			$this->data['account_status_tooltip'] = $this->language->get('account_verified');
+		} else {
+			$this->data['account_status'] = $this->language->get('text_unverified');
+			$this->data['account_status_class'] = 'warning';
+			$this->data['account_status_tooltip'] = $this->language->get('account_unverified');
+		}
 		//-> webpage blocks
 		$this->data['header'] = $this->load->controller('common/header');
 		$this->data['column_left'] = $this->load->controller('common/column_left');
@@ -48,11 +94,12 @@ class ControllerExtensionPaymentPayapi extends Controller
 		if (isset($this->request->post['payapi_staging']) !== true) {
 			$this->error['warning'] = $this->language->get('error_default');
 		} else {
-			if($this->request->post['payapi_staging'] === 1) {
+			if($this->request->post['payapi_mode'] === 1) {
 				$staging = true;
 			} else {
 				$staging = false;
 			}
+			// @NOTE demo mode is mode3, do not seetings if demo
 			if (isset($this->request->post['payapi_public_id']) !== true || isset($this->request->post['payapi_api_key']) !== true || is_string($this->request->post['payapi_public_id']) !== true || is_string($this->request->post['payapi_api_key']) !== true) {
 				$this->error['account'] = $this->language->get('error_account');
 			}
@@ -75,49 +122,59 @@ class ControllerExtensionPaymentPayapi extends Controller
 		return !$this->error; 
 	}
 
+	private function errors()
+	{
+		$errors = array(
+			"warning",
+			"error_account"
+		);
+		foreach($errors as $key => $error) {
+			if (isset($this->error[$error]) === true) {
+				$this->data[$error] = $this->error['warning'];
+			} else {
+				$this->data[$error] = false;
+			}
+		}
+	}
+
 	private function values()
 	{
-		if ($this->valid === true) {
-
+		foreach($this->values as $key => $value) {
+			if ($this->valid === true) {
+				$this->data[$value] = $this->request->post[$value];
+			} else if (is_array($this->settings) !== true){
+				$this->data[$value] = $this->config->get($value);
+			} else {
+				$this->data[$value] = null;
+			}
 		}
-		//->
-		if ($this->valid === true && isset($this->request->post['payapi_public_id']) === true) {
-			$this->data['payapi_public_id'] = $this->request->post['payapi_public_id'];
-		} else if ($this->config->has('payapi_public_id') === true) {
-			$this->data['payapi_public_id'] = $this->config->get('payapi_public_id');
-		} else {
-			$this->data['payapi_public_id'] = null;
-		}
-		if ($this->valid === true && isset($this->request->post['payapi_api_key']) === true) {
-			$this->data['payapi_api_key'] = $this->request->post['payapi_api_key'];
-		} else if ($this->config->has('payapi_api_key') === true) {
-			$this->data['payapi_api_key'] = $this->config->get('payapi_api_key');
-		} else {
-			$this->data['payapi_api_key'] = null;
-		}
-
 	}
 
 	private function breadcrumbs()
 	{
-		$breadcrumbs = array();
-		$breadcrumbs[] = array(
+		$this->data['breadcrumbs'] = array();
+		$this->data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
 		);
-		$breadcrumbs[] = array(
+		$this->data['breadcrumbs'][] = array(
+			'text' => $this->data['text_extensions'],
+			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
+		);
+		$this->data['breadcrumbs'][] = array(
 			'text' => $this->data['text_payments'],
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'] . '&type=payment', true)
 		);
-		$breadcrumbs[] = array(
+		$this->data['breadcrumbs'][] = array(
 			'text' => $this->data['heading_title'],
 			'href' => $this->url->link('extension/payment/payapi', 'token=' . $this->session->data['token'], true)
 		);
+		return $this->data['breadcrumbs'];
 	}
 
 	private function wording()
 	{
-		$wording = array(
+		foreach (array(
 			"heading_title",
 			"tab_general",
 			"tab_status",
@@ -134,50 +191,73 @@ class ControllerExtensionPaymentPayapi extends Controller
 			"text_dashboard",
 			"text_yes",
 			"text_no",
-			"status_processing",
-			"status_success",
-			"status_canceled",
-			"status_failed",
-			"status_chargeback",
+			"text_extensions",
 			"label_public_id",
 			"label_api_key",
 			"label_shipping",
 			"label_mode",
 			"label_instant_payments",
 			"label_debug",
+			"label_account_status",
 			"label_order",
-			"label_processing_status",
-			"label_processed_status",
-			"",
-			"",
+			"label_status_processing",
+			"label_status_processed",
+			"label_status_failed",
+			"label_status_chargeback",
+			"label_status",
+			"label_sort_order",
 			"select_default",
 			"select_shipping",
 			"select_mode",
 			"input_selected",
 			"input_disabled",
+			'button_update',
+			'button_save',
+			'button_cancel',
 			"mode_1",
 			"mode_2",
 			"mode_3",
 			"help_public_id",
 			"help_api_key",
+			"help_shipping",
+			"help_debug",
 			"help_instantpayments",
 			"help_verified",
-			"help_unverified"
-		);
-		foreach($wording as $key => $word) {
+			"help_unverified",
+			"help_account_status"
+		) as $key => $word) {
 			$this->data[$word] = $this->language->get($word);
 		}
 	}
 
 	private function branding()
 	{
-		$branding = $this->payapiSdk->branding($this->brand);
-		if (isset($branding['code']) === true && isset($branding['data']) === true && $branding['code'] ===200) {
-			$this->data['branding'] = $branding['data'];
-			$this->data['branding']['dashboard'] = 'http://input.payapi.io/';
+		//$branding = $this->payapiSdk->branding($this->brand);
+		$branding = $this->model_extension_payment_payapi->branding();
+		if (is_array($branding) === true) {
+			$this->data['branding'] = $branding;
+			if ($this->staging === false) {
+				$this->data['branding']['dashboard'] = $this->branding['partnerBackoffice']['production'];
+			} else {
+				$this->data['branding']['dashboard'] = $this->branding['partnerBackoffice']['staging'];
+			}
 			return true;
 		}
 		return false;
+	}
+
+	private function status()
+	{
+		foreach($this->statuses as $status => $defaultId) {
+			$flag = 'payapi_' . $status . '_status_id';
+			if ($this->valid === true) {
+				$this->data[$flag] = $this->request->post[$flag];
+			} else if (is_array($this->settings) !== true){
+				$this->data[$flag] = $this->config->get($flag);
+			} else {
+				$this->data[$flag] = $defaultId;
+			}
+		}
 	}
 
 	private function dependencies()

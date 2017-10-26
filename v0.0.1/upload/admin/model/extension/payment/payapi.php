@@ -2,6 +2,7 @@
 class ModelExtensionPaymentPayapi extends Model {
 
 	private $vqmod    = 'payapi';
+	private $brand    = 'payapi';
 
 	public function install()
 	{
@@ -36,18 +37,41 @@ class ModelExtensionPaymentPayapi extends Model {
 		return str_replace('system', 'vqmod', DIR_SYSTEM) . 'xml' . DIRECTORY_SEPARATOR . $this->vqmod . $this->vqmod . '.' . 'xml';
 	}
 
+	public function branding()
+	{
+		$branding = $this->checkResponse($this->payapiSdk->branding($this->brand));
+		return $branding;
+	}
+
 	public function settings()
 	{
-		$settings = $this->payapiSdk->settings();
-		if(isset($settings['code']) === true && isset($settings['data']) === true && $settings['code'] === 200) {
-			return $settings['data'];
-		} 
-		return false;
+		return $this->checkResponse($this->payapiSdk->settings());
 	}
 
 	public function info()
 	{
-		return $this->payapiSdk->info();
+		return $this->checkResponse($this->payapiSdk->info());
+	}
+
+	private function checkResponse($response)
+	{
+		if (isset($response['code']) === true) {
+			if ($response['code'] === 200 && isset ($response['data']) === true) {
+				return $response['data'];
+			} else {
+				$code = $response['code'];
+				if(isset($response['error']) === true) {
+					$error = $response['error'];
+				} else {
+					$error = 'undefined';
+				}
+			}
+		} else{
+			$code = 'undefined';
+			$error = 'undefined';
+		}
+		$this->log('[error][' . $code . '] ' . $error);
+		return false;
 	}
 
 	private function defaultSettings()

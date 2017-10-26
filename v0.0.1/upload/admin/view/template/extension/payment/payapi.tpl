@@ -3,7 +3,7 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right">
-        <button type="submit" form="form-pp-std-uk" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <button type="submit" form="form-pp-std-uk" data-toggle="tooltip" title="<?php echo $button_update; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
         <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn"><i class="fa fa-reply"></i></a>
       </div>
       <h1><?php echo $heading_title; ?></h1>
@@ -78,36 +78,33 @@
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="entry-merchant-id"><span data-toggle="tooltip" title="<?php echo $help_public_id; ?>"><?php echo $label_public_id; ?></label>
                 <div class="col-sm-10">
-                  <input type="text" name="payapi_public_id" value="<?php echo $payapi_public_id; ?>" placeholder="<?php echo $label_public_id; ?>" id="entry-merchant-id" class="form-control"/>
-                  <?php if ($error_public_id) { ?>
-                  <div class="text-danger"><?php echo $error_public_id; ?></div>
+                  <input type="text" name="payapi_public_id" value="<?php echo $payapi_public_id; ?>" placeholder="<?php echo $label_public_id; ?>" id="entry-merchant-id" class="form-control" autocomplete="off"/>
+                  <?php if ($error_account) { ?>
+                  <div class="text-danger"><?php echo $error_account; ?></div>
                   <?php } ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="entry-api-key"><span data-toggle="tooltip" title="<?php echo $help_api_key; ?>"><?php echo $label_api_key; ?></label>
                 <div class="col-sm-10">
-                  <input type="text" name="payapi_api_key" value="<?php echo $payapi_api_key; ?>" placeholder="<?php echo $label_api_key; ?>" id="entry-api-key" class="form-control"/>
-                  <?php if ($error_api_key) { ?>
-                  <div class="text-danger"><?php echo $error_api_key; ?></div>
+                  <input type="password" name="payapi_api_key" value="<?php echo $payapi_api_key; ?>" placeholder="<?php echo $label_api_key; ?>" id="entry-api-key" class="form-control" autocomplete="off"/>
+                  <?php if ($error_account) { ?>
+                  <div class="text-danger"><?php echo $error_account; ?></div>
                   <?php } ?>
                 </div>
               </div>
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="entry-default-shipping"><span data-toggle="tooltip" title="<?php echo $help_shipping; ?>"><?php echo $label_shipping; ?></label>
                 <div class="col-sm-10">
-                  <select name="payapi_default_shipping"  id="entry-default-shipping" id="entry-default-shipping" class="form-control">
+                  <select name="payapi_shipping"  id="entry-default-shipping" id="entry-default-shipping" class="form-control">
                     <option value ="">--- <?=$select_shipping?> ---</option>
                       <?php
                       foreach ( $shippings as $shipping ) {
                         $selected = null ;
-                        if ( $shipping == $payapi_default_shipping ) $selected = ' selected' ;?>
+                        if ( $shipping == $payapi_shipping ) $selected = ' selected' ;?>
                     <option value="<?=$shipping?>"<?=$selected?>><?=$shipping?></option>
                       <?php }?>
                   </select>
-                  <?php if ($error_default_shipping) { ?>
-                  <div class="text-danger"><?php echo $error_default_shipping; ?></div>
-                  <?php } ?>
                 </div>
               </div>
               <div class="form-group">
@@ -148,19 +145,14 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $label_order; ?></label>
-                <div class="col-sm-10">
-                  <input type="text" name="payapi_sort_order" value="<?php echo $payapi_sort_order; ?>" placeholder="<?php echo $text_sort_order; ?>" id="input-sort-order" class="form-control"/>
-                </div>
-              </div>
             </div>
             <div class="tab-pane" id="tab-status">
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-processing-status"><?php echo $label_processing_status; ?></label>
+                <label class="col-sm-2 control-label" for="input-processing-status"><?php echo $label_status_processing; ?></label>
                 <div class="col-sm-10">
-                  <select name="payapi_processing_status_id" id="input-processing-status" class="form-control">
-                    <?php foreach ($order_statuses as $order_status) { ?>
+                  <select name="payapi_status_processing_id" id="input-processing-status" class="form-control">
+                    <?php
+                    foreach ($order_statuses as $order_status) { ?>
                     <?php if ($order_status['order_status_id'] == $payapi_processing_status_id) { ?>
                     <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
                     <?php } else { ?>
@@ -171,9 +163,9 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-processed-status"><?php echo $status_processed; ?></label>
+                <label class="col-sm-2 control-label" for="input-processed-status"><?php echo $label_status_processed; ?></label>
                 <div class="col-sm-10">
-                  <select name="payapi_processed_status_id" id="input-processed-status" class="form-control">
+                  <select name="payapi_status_processed_id" id="input-processed-status" class="form-control">
                     <?php foreach ($order_statuses as $order_status) { ?>
                     <?php if ($order_status['order_status_id'] == $payapi_processed_status_id) { ?>
                     <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
@@ -185,23 +177,9 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-canceled-status"><?php echo $status_canceled; ?></label>
+                <label class="col-sm-2 control-label" for="input-failed-status"><?php echo $label_status_failed; ?></label>
                 <div class="col-sm-10">
-                  <select name="payapi_canceled_status_id" id="input-canceled-status" class="form-control">
-                    <?php foreach ($order_statuses as $order_status) { ?>
-                    <?php if ($order_status['order_status_id'] == $payapi_canceled_status_id) { ?>
-                    <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
-                    <?php } else { ?>
-                    <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
-                    <?php } ?>
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-failed-status"><?php echo $label_failed_status; ?></label>
-                <div class="col-sm-10">
-                  <select name="payapi_failed_status_id" id="input-failed-status" class="form-control">
+                  <select name="payapi_status_failed_id" id="input-failed-status" class="form-control">
                     <?php foreach ($order_statuses as $order_status) { ?>
                     <?php if ($order_status['order_status_id'] == $payapi_failed_status_id) { ?>
                     <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
@@ -213,9 +191,9 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-chargeback-status"><?php echo $text_chargeback_status; ?></label>
+                <label class="col-sm-2 control-label" for="input-chargeback-status"><?php echo $label_status_chargeback; ?></label>
                 <div class="col-sm-10">
-                  <select name="payapi_chargeback_status_id" id="input-chargeback-status" class="form-control">
+                  <select name="payapi_status_chargeback_id" id="input-chargeback-status" class="form-control">
                     <?php foreach ($order_statuses as $order_status) { ?>
                     <?php if ($order_status['order_status_id'] == $payapi_chargeback_status_id) { ?>
                     <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
@@ -228,13 +206,14 @@
               </div>
             </div>
           </div>
+          <input type="hidden" name="payapi_order" value="0" id="input-sort-order">
         </form>
         <hr>
         <div class="tab-pane">
           <div class="form-group">
-            <label class="col-sm-2 control-label text-right"><span data-toggle="tooltip" title="<?php echo $help_account_status; ?>"><?php echo $text_payapi_acccount; ?></span></label>
+            <label class="col-sm-2 control-label text-right"><span data-toggle="tooltip" title="<?php echo $help_account_status; ?>"><?php echo $label_account_status; ?></span></label>
             <div class="col-sm-10">
-              <span class="text-uppercase label-<?=$account_status_class?>" data-toggle="tooltip" title="<?=$account_status_tootip?>" style="color:#fff;letter-spacing:1px;padding:.4em .8em;">
+              <span class="text-uppercase label-<?=$account_status_class?>" data-toggle="tooltip" title="<?=$account_status_tooltip?>" style="color:#fff;letter-spacing:1px;padding:.4em .8em;">
                 <?=$account_status?>
               </span>
             </div>
